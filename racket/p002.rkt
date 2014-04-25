@@ -1,5 +1,20 @@
 #lang racket
+;;;;;;;;;;;;;;;;;
+;;shorter solution, but not as efficient - using libraries
+(require math/number-theory)
+;;iter: -> Int
+;;Sums all fibonacci numbers smaller than n that are even
+(define (iter n)
+  (define (iter x sum)
+    (define f (fibonacci x))
+    (cond [(> f n) sum]
+          [(even? f) (iter (add1 x) (+ sum f))]
+          [else (iter (add1 x) sum)]))
+  (iter 0 0))
+(iter 400000)
 
+;;;;;;;;;;;;;;;;;
+;;original solution - more efficient/fast
 (define fibtable empty)
 
 ;;fib: Integer -> Integer

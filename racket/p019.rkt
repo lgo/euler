@@ -8,7 +8,7 @@
 (define (max-days month year)
   (define check (lambda (x) (= month x)))
   (cond [(ormap check '(4 6 9 11)) 30]
-        [(= month 2) (if (leap? year) 29 29)]
+        [(= month 2) (if (leap? year) 29 28)]
         [else 31]))
 
 ;;divisible?: Int Int -> Boolean

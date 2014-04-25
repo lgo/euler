@@ -1,15 +1,22 @@
 #lang racket
+;;;;;;;;;;;;;;;;;;;
+;; shorter solution
+(require math/number-theory)
+(last (prime-divisors 600851475143))
+
+;;;;;;;;;;;;;;;;;;;
+;; original solution
 
 ;;factors: Int -> (listof (list Int Int))
 ;;Returns a list of factor pairs, where the first is increasing and the second is decreasing
 (define (factors num)
   ;;factorz: Int (listof (list Int Int))
   ;;Accumulates the factors in acc as ther iterator grows to the largest possible factor
-  (define (factorz iter acc)
+  (define (factors iter acc)
     (cond [(< (sqrt num) iter) acc]
-          [(exact-nonnegative-integer? (/ num iter)) (factorz (add1 iter) (cons (list iter (/ num iter)) acc))]
-          [else (factorz (add1 iter) acc)]))
-  (factorz 2 empty))
+          [(exact-nonnegative-integer? (/ num iter)) (factors (add1 iter) (cons (list iter (/ num iter)) acc))]
+          [else (factors (add1 iter) acc)]))
+  (factors 2 empty))
 
 ;;is-prime: Int -> Boolean
 ;;Determines whether or not p is prime
